@@ -103,6 +103,7 @@ p_label_mode_passageheightposneg:=4;
 p_label_mode_height:=7;
 p_label_mode_debugscrap:=6;
 p_label_mode_debugstation:=7;
+p_label_mode_heightpitdepth:=6;
 
 vardef p_label@#(expr txt,pos,rot,mode) =
   if (mode=1) or (mode=7): interim labeloffset:=(u/8) fi;

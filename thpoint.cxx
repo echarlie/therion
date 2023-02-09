@@ -570,10 +570,12 @@ bool thpoint::export_mp(class thexpmapmpxs * out)
 
     case TT_POINT_TYPE_HEIGHT:
       if ((this->tags & (TT_POINT_TAG_HEIGHT_P |
-          TT_POINT_TAG_HEIGHT_N | TT_POINT_TAG_HEIGHT_U)) != 0) {
+          TT_POINT_TAG_HEIGHT_N | TT_POINT_TAG_HEIGHT_U |
+	  TT_POINT_TAG_HEIGHT_PD)) != 0) {
 
         switch (this->tags & (TT_POINT_TAG_HEIGHT_P |
-        TT_POINT_TAG_HEIGHT_N | TT_POINT_TAG_HEIGHT_U)) {
+        TT_POINT_TAG_HEIGHT_N | TT_POINT_TAG_HEIGHT_U |
+	TT_POINT_TAG_HEIGHT_PD)) {
           case TT_POINT_TAG_HEIGHT_P:
             macroid = SYMP_HEIGHT_POSITIVE;
             break;
@@ -582,6 +584,9 @@ bool thpoint::export_mp(class thexpmapmpxs * out)
             break;
           case TT_POINT_TAG_HEIGHT_U:
             macroid = SYMP_HEIGHT_UNSIGNED;
+            break;
+          case TT_POINT_TAG_HEIGHT_PD:
+            macroid = SYMP_HEIGHT_PITDEPTH;
             break;
           default:
             return(false);
@@ -680,7 +685,7 @@ bool thpoint::export_mp(class thexpmapmpxs * out)
         out->symset->export_mp_symbol_options(out->file, omacroid);
         fprintf(out->file,"p_label%s(btex ",thpoint_export_mp_align2mp(thdb2d_rotate_align(this->align, xrr)));
         switch (this->tags & (TT_POINT_TAG_HEIGHT_P |
-        TT_POINT_TAG_HEIGHT_N | TT_POINT_TAG_HEIGHT_U)) {
+	TT_POINT_TAG_HEIGHT_N | TT_POINT_TAG_HEIGHT_U)) {
           case (TT_POINT_TAG_HEIGHT_P | TT_POINT_TAG_HEIGHT_N):
             fprintf(out->file,"\\thframed \\updown");
             postprocess_label = "p_label_mode_passageheightposneg";

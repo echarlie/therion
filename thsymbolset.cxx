@@ -382,6 +382,7 @@ int thsymbolset_get_id(const char * symclass, const char * symbol)
             c2(TT_POINT_SUBTYPE_POSITIVE,SYMP_HEIGHT_POSITIVE);
             c2(TT_POINT_SUBTYPE_NEGATIVE,SYMP_HEIGHT_NEGATIVE);
             c2(TT_POINT_SUBTYPE_UNSIGNED,SYMP_HEIGHT_UNSIGNED);
+	    c2(TT_POINT_SUBTYPE_PITDEPTH,SYMP_HEIGHT_PITDEPTH);
           }
           break;
         case TT_POINT_TYPE_WATER_FLOW:
@@ -969,6 +970,7 @@ int thsymbolset_get_group(int group_id, int cid) {
     group(0,SYMP_HEIGHT_POSITIVE)
     group(1,SYMP_HEIGHT_NEGATIVE)
     group(2,SYMP_HEIGHT_UNSIGNED)
+    group(3,SYMP_HEIGHT_PITDEPTH)
     egroup
 
 
@@ -1304,6 +1306,15 @@ void thsymbolset::export_pdf(class thlayout * layout, FILE * mpf, unsigned & sfi
   endhelpsymbol;
   this->export_mp_symbol_options(mpf, SYMP_HEIGHT_NEGATIVE);
   fprintf(mpf,"p_label.rt(btex \\thheightneg %s etex,((0.5,0.5) inscale),0,p_label_mode_height);\n",utf2tex("30").c_str());
+  endfig;
+
+  insfig(SYMP_HEIGHT_PITDEPTH,thT("point height:pitdepth",layout->lang));
+  helpsymbol;
+  if isused(SYML_PIT)
+    fprintf(mpf,"%s(%s);\n",thsymbolset_mp[SYML_PIT],legend_scline);
+  endhelpsymbol;
+  this->export_mp_symbol_options(mpf, SYMP_HEIGHT_PITDEPTH);
+  fprintf(mpf,"p_label.rt(btex \\thheightpitdepth %s etex,((0.5,0.5) inscale),0,p_label_mode_heightpitdepth);\n",utf2tex("78").c_str());
   endfig;
 
   insfig(SYML_CONTOUR,thT("line contour",layout->lang));

@@ -41,6 +41,7 @@ $SYMHASH{p_wallaltitude} = "noassign";
 $SYMHASH{p_height_positive} = "noassign";
 $SYMHASH{p_height_negative} = "noassign";
 $SYMHASH{p_height_unsigned} = "noassign";
+$SYMHASH{p_height_pitdepth} = "noassign";
 $SYMHASH{p_passageheight_positive} = "noassign";
 $SYMHASH{p_passageheight_negative} = "noassign";
 $SYMHASH{p_passageheight_both} = "noassign";
